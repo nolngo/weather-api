@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id='temp-display'>0.0</h1>
+
+    <script src="weather-api.js"></script>
+    <script>
+        const tempDisplay = document.getElementById('temp-display')
+        const zip = '22003'
+        const apikey = 'affe0033c2f4bedf2b442db296ce882b'
+        getWeather(zip, apikey, (json) => {
+          tempDisplay.innerHTML = json.main.temp
+        })
+
+        // API CALL:
+        // api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=affe0033c2f4bedf2b442db296ce882b
+        // API KEY:
+        // affe0033c2f4bedf2b442db296ce882b
+    </script>
+</body>
+</html>
