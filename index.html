@@ -14,8 +14,10 @@
         const tempDisplay = document.getElementById('temp-display')
         const zip = '22003'
         const apikey = 'affe0033c2f4bedf2b442db296ce882b'
-        getWeather(zip, apikey, (json) => {
+        getWeather(zip, apikey).then((json) => {
           tempDisplay.innerHTML = json.main.temp
+        }).catch((err) => {
+          console.log(err.message)
         })
 
         // API CALL:
