@@ -4,20 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather App</title>
+    <style>
+      body, html {
+        height: 100%;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 20px;
+        line-height: 1.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: red;
+        background-color: powderblue;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      input, button {
+        font-size: 1rem;
+        padding: 0.5rem;
+        margin: 0.2rem 0 0 0;
+        border-radius: 15px;
+      }
+
+      button {
+        background-color: green;
+        color: white;
+      }
+
+      small {
+        margin: 0 0 1rem 0;
+        padding: 0;
+        color:navy;
+      }
+
+    </style>
 </head>
 <body>
-    <h1 id='temp-display'>0.0</h1>
+    <div class="container">
+      <h1 id='temp-display'>0.0</h1>
+      <small id='weather-description'>
+        <!-- weather description -->
+      </small>
+      <form id="form">
+        <input id="input-zip"
+          type="number"
+          placeholder="Enter Zip Code"
+        >
+        <button type="submit">Search</button>
+      </form>
+    </div>
 
     <script src="weather-api.js"></script>
     <script>
+        const form = document.getElementById('form')
+        const inputZip = document.getElementById('input-zip')
         const tempDisplay = document.getElementById('temp-display')
-        const zip = '22003'
-        const apikey = 'affe0033c2f4bedf2b442db296ce882b'
-        getWeather(zip, apikey).then((json) => {
-          tempDisplay.innerHTML = json.main.temp
-        }).catch((err) => {
-          console.log(err.message)
+        const weatherDescription = document.getElementById('weather-description')
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault()
+          const apikey = 'affe0033c2f4bedf2b442db296ce882b'
+          const zip = inputZip.value
+          getWeather(zip, apikey).then((json) => {
+            console.log(json)
+            tempDisplay.innerHTML = json.main.temp
+            weatherDescription.innerHTML = json.weather[0].description
+          }).catch((err) => {
+            console.log(err.message)
+          })
         })
 
         // API CALL:
