@@ -1,8 +1,16 @@
-async function getWeather(zip, apikey, unit) {
-  const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apikey}&units=${unit}`;
+class OpenWeather {
+  constructor(apikey, unit) {
+    this.apikey = apikey;
+    this.unit = unit;
+  }
 
-  const res = await fetch(path);
-  const json = await res.json();
+  async getWeather(zip) {
+    const { apikey, unit } = this;
+    const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apikey}&units=${unit}`;
 
-  return json;
+    const res = await fetch(path);
+    const json = await res.json();
+
+    return json;
+  }
 }

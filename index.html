@@ -68,7 +68,7 @@
         id="metric"
         value="metric"
         >Metric<br>
-        <button type="submit" onclick="displayRadioValue()">Search</button>
+        <button type="submit">Search</button>
       </form>
     </div>
 
@@ -80,12 +80,15 @@
         const tempDisplay = document.getElementById('temp-display')
         const weatherDescription = document.getElementById('weather-description')
 
+        const apikey = 'affe0033c2f4bedf2b442db296ce882b'
+        const unit = "imperial"
+
+        const weather = new OpenWeather(apikey, unit)
+
         form.addEventListener('submit', (e) => {
           e.preventDefault()
-          const apikey = 'affe0033c2f4bedf2b442db296ce882b'
           const zip = inputZip.value
-          const unit = "metric"
-          getWeather(zip, apikey, unit).then((json) => {
+          weather.getWeather(zip).then((json) => {
             console.log(json)
             tempDisplay.innerHTML = json.main.temp
             weatherDescription.innerHTML = json.weather[0].description
