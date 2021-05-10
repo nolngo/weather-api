@@ -51,12 +51,24 @@
       <small id='weather-description'>
         <!-- weather description -->
       </small>
-      <form id="form">
+      <form id='form'>
         <input id="input-zip"
           type="number"
           placeholder="Enter Zip Code"
-        >
-        <button type="submit">Search</button>
+        ><br>
+        <input
+        type="radio"
+        name="input-unit"
+        id="imperial"
+        value="imperial"
+        >Imperial<br>
+        <input
+        type="radio"
+        name="input-unit"
+        id="metric"
+        value="metric"
+        >Metric<br>
+        <button type="submit" onclick="displayRadioValue()">Search</button>
       </form>
     </div>
 
@@ -64,6 +76,7 @@
     <script>
         const form = document.getElementById('form')
         const inputZip = document.getElementById('input-zip')
+        const inputUnit = document.getElementById('input-unit')
         const tempDisplay = document.getElementById('temp-display')
         const weatherDescription = document.getElementById('weather-description')
 
@@ -71,7 +84,8 @@
           e.preventDefault()
           const apikey = 'affe0033c2f4bedf2b442db296ce882b'
           const zip = inputZip.value
-          getWeather(zip, apikey).then((json) => {
+          const unit = "metric"
+          getWeather(zip, apikey, unit).then((json) => {
             console.log(json)
             tempDisplay.innerHTML = json.main.temp
             weatherDescription.innerHTML = json.weather[0].description
